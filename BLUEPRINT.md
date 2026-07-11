@@ -195,7 +195,7 @@ leaves" an *infrastructure* guarantee, not just a code invariant.
 
 ## 9. Build steps
 
-Each step lists **Goal → Build → Verify**. Do not proceed past a failing Verify.
+Each step lists **Goal → Build → Verify**. Do not proceed past a failing Verify. After every step, pause to allow me to verify the outputs. Describe how to test the current step once done with a step.
 
 ### Step 0 — Setup and external-contract probe
 - **Goal:** clean repo, secrets handling, and confirmed external contracts before building.
