@@ -14,7 +14,6 @@ from plva_proxy.contract_probe import (
     summarize_sse,
 )
 
-
 SYNTHETIC_PNG = base64.b64decode(
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
 )
