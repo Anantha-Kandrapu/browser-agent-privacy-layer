@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body{margin:0;background:#ffffff;font-family:'Helvetica Neue',Arial,sans-serif;color:#1a1a1a;
+       width:1920px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:110px;box-sizing:border-box}
+  h1{font-size:52px;margin:0 0 12px;font-weight:600}
+  .kicker{font-size:22px;color:#666;letter-spacing:1px;text-transform:uppercase;margin-bottom:50px}
+  .row{display:flex;align-items:center;gap:28px;margin-bottom:36px}
+  .box{border:1.5px solid #d0d0d0;border-radius:8px;padding:24px 32px;font-size:28px;
+       background:#fafafa;min-width:280px;text-align:center;font-weight:500}
+  .proxy{border-color:#1a1a1a;background:#1a1a1a;color:#fff}
+  .arrow{font-size:30px;color:#999}
+  .sub{font-size:22px;color:#444;margin-top:20px;max-width:1600px;line-height:1.6;
+       border-top:1px solid #e5e5e5;padding-top:30px}
+</style>
+</head>
+<body>
+  <div class="kicker">Architecture &mdash; Overview</div>
+  <h1>PLVA: Privacy Layer for Computer-Use Agents</h1>
+  <div class="row" style="margin-top:20px">
+    <div class="box">HoloDesktop CLI<br><span style="font-size:19px;color:#777">hai-agent-runtime</span></div>
+    <div class="arrow">&#8594;</div>
+    <div class="box proxy">PLVA Proxy<br><span style="font-size:19px;color:#ccc">vault + safety policy</span></div>
+    <div class="arrow">&#8594;</div>
+    <div class="box">Overshoot<br><span style="font-size:19px;color:#777">Holo3-35B-A3B</span></div>
+  </div>
+  <div class="sub">
+    Goal: keep sensitive data hidden from the AI model itself, not from the user's own computer.
+    The proxy sits in between so it can hide values before they reach the model, and safely restore
+    them before an action runs &mdash; the model works with the task without ever seeing the real data.
+  </div>
+</body>
+</html>

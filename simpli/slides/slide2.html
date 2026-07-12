@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body{margin:0;background:#ffffff;font-family:'Helvetica Neue',Arial,sans-serif;color:#1a1a1a;
+       width:1920px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:110px;box-sizing:border-box}
+  h1{font-size:52px;margin:0 0 12px;font-weight:600}
+  .kicker{font-size:22px;color:#666;letter-spacing:1px;text-transform:uppercase;margin-bottom:50px}
+  .cols{display:flex;gap:50px;margin-top:10px}
+  .col{flex:1;border:1.5px solid #e0e0e0;border-radius:8px;padding:30px}
+  .col h2{font-size:26px;margin:0 0 20px;font-weight:600;border-bottom:1px solid #eee;padding-bottom:14px}
+  .col ol{margin:0;padding-left:22px;font-size:22px;line-height:1.9;color:#333}
+  .req h2{color:#1a1a1a}
+  .res h2{color:#1a1a1a}
+  .footer{font-size:20px;color:#666;margin-top:40px;line-height:1.6;border-top:1px solid #e5e5e5;padding-top:26px}
+</style>
+</head>
+<body>
+  <div class="kicker">Architecture &mdash; Proxy Flow</div>
+  <h1>What the Proxy Does on Each Leg</h1>
+  <div class="cols">
+    <div class="col req">
+      <h2>Request &mdash; runtime &rarr; model</h2>
+      <ol>
+        <li>Redact screenshot (detector), store spans + real values in the vault</li>
+        <li>Scrub history: vault match, then semantic reclassify (Rampart) as backstop</li>
+        <li>Inject placeholder instructions (e.g. <code>EMAIL_1_a3f9</code>) into the request</li>
+      </ol>
+    </div>
+    <div class="col res">
+      <h2>Response &mdash; model &rarr; runtime</h2>
+      <ol>
+        <li>Parse the returned action</li>
+        <li>Resolve placeholders in executed fields only, never in reasoning text</li>
+        <li>Gated classes (e.g. API keys) are consulted with the mediator before resolving</li>
+        <li>Fail closed: no match &rarr; no forward, ever</li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer">
+    Per-class safety levels govern resolution: <b>hide&#8209;use</b> (freely resolvable), <b>approval</b>
+    (needs mediator sign-off), <b>blocked</b> (never stored, never resolvable). Nothing is persisted to
+    disk, and logs never carry real values or frames.
+  </div>
+</body>
+</html>
