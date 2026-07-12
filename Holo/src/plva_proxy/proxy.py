@@ -744,6 +744,17 @@ def _env_file_value(path: Path, key: str) -> str | None:
     return None
 
 
+def _detect_provider() -> str:
+    """Pick the provider whose API key is present in the env or ``.env``, else overshoot."""
+
+    for name, spec in PROVIDERS.items():
+        if any(
+            os.environ.get(key) or _env_file_value(Path(".env"), key) for key in spec.key_names
+        ):
+            return name
+    return "overshoot"
+
+
 def main() -> None:
     """Run the interception proxy on a fixed loopback interface."""
 
@@ -752,10 +763,9 @@ def main() -> None:
     parser.add_argument(
         "--provider",
         choices=tuple(PROVIDERS),
-        default=os.environ.get(
-            "PLVA_PROVIDER", "hcompany" if os.environ.get("HAI_API_KEY") else "overshoot"
-        ),
-        help="inference-provider preset (default: hcompany if HAI_API_KEY is set, else overshoot)",
+        default=os.environ.get("PLVA_PROVIDER", _detect_provider()),
+        help="inference-provider preset (default: auto-detected from whichever "
+        "provider's API key is set, else overshoot)",
     )
     parser.add_argument(
         "--upstream",
