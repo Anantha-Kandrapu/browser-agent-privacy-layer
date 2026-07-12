@@ -26,8 +26,8 @@ flowchart TB
     HOOK_RES -->|redacted request| PROVIDER
 
     subgraph PROVIDER["Upstream LLM provider (providers.py presets)"]
-        OVERSHOOT["Overshoot\nmodel: Hcompany/Holo3-35B-A3B\nJSON + SSE contract"]
-        HCOMPANY["H Company\nHAI_API_KEY, PLVA_PROVIDER=hcompany"]
+        HCOMPANY["H Company direct (default)\napi.hcompany.ai/v1\nmodel: holo3-1-35b-a3b\nHAI_API_KEY"]
+        OVERSHOOT["Overshoot (fallback preset)\nmodel: Hcompany/Holo3-35B-A3B\nOVERSHOOT_API_KEY / API_KEY"]
     end
 
     PROVIDER -->|completion / SSE stream| HOOK_RES
@@ -46,6 +46,6 @@ flowchart TB
 | OCR (opt-in) | `coreml-redactor` | Native Apple Vision (Swift, `vision_ocr_worker.swift`) + RapidOCR Core ML fallback |
 | Semantic classification (opt-in engine only) | `coreml-redactor` | Rule engine + Core ML "Rampart" classifier (`semantics.py`) |
 | Redaction oracle (dev-only) | `plva-v2-baseline` | Frozen v2 detector, gitignored, AGPL |
-| Upstream completion | `plva_proxy/providers.py` | Overshoot: `Hcompany/Holo3-35B-A3B`; or H Company endpoint |
+| Upstream completion | `plva_proxy/providers.py` | H Company direct (default): `holo3-1-35b-a3b`; Overshoot fallback: `Hcompany/Holo3-35B-A3B` |
 
 Not built yet: placeholder-ID substitution, vault, resolution, history scrubbing.
