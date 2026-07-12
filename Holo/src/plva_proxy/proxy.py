@@ -752,8 +752,10 @@ def main() -> None:
     parser.add_argument(
         "--provider",
         choices=tuple(PROVIDERS),
-        default=os.environ.get("PLVA_PROVIDER", "overshoot"),
-        help="inference-provider preset (default: overshoot)",
+        default=os.environ.get(
+            "PLVA_PROVIDER", "hcompany" if os.environ.get("HAI_API_KEY") else "overshoot"
+        ),
+        help="inference-provider preset (default: hcompany if HAI_API_KEY is set, else overshoot)",
     )
     parser.add_argument(
         "--upstream",
